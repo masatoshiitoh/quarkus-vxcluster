@@ -24,6 +24,7 @@ public class VertxResource {
     @GET
     @Path("/lorem")
     public Uni<String> readShortFile() {
+        vertx.eventBus().publish("test", "Hello from Vert.x!");
         return vertx.fileSystem().readFile("lorem.txt")
                 .onItem().transform(content -> content.toString(StandardCharsets.UTF_8));
     }
